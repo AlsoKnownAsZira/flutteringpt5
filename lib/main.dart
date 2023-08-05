@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'pages/getHttp.dart';
+// ignore_for_file: prefer_const_constructors
 void main() {
   runApp(const ziraApp());
 }
@@ -7,8 +8,11 @@ void main() {
 class ziraApp extends StatelessWidget {
   const ziraApp({super.key});
 
-  @override
+    @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const MaterialApp(
+      home: getHttp(),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
