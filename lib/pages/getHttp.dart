@@ -53,23 +53,16 @@ class _getHttpState extends State<getHttp> {
               height: 12,
             ),
             ElevatedButton(
-                // use await and async for waiting until the data is fetched ( in case of slow connection )
                 onPressed: () async {
-                  // get the data from dummy server and parse it
-                  var serverResponse = await ziraHttp
-                      .get(Uri.parse("https://reqres.in/api/users/9"));
-                  if (serverResponse.statusCode == 200) {
-                    // successfully get data (status 200)
-                    //jsonDecode to decode string source to dynamic object
-                    Map<String, dynamic> dataResp =
-                        json.decode(serverResponse.body);
-                    // use 'data' because it is stated like that in the API and to load the body
-                    dataResp = dataResp['data'];
+                  // use await and async for waiting until the data is fetched ( in case of slow connection )
+                  var serverResponse = await ziraHttp.get(Uri.parse("https://reqres.in/api/users/9")); // get the data from dummy server and parse it
+                  if (serverResponse.statusCode == 200) {  // successfully get data (status 200)
+                    Map<String, dynamic> dataResp = json.decode(serverResponse.body); //jsonDecode to decode string source to dynamic object
+                    dataResp = dataResp['data']; // use 'data' because it is stated like that in the API and to load the body
                     setState(() {
                       id = dataResp["id"].toString();
                       email = dataResp["email"].toString();
-                      name =
-                          "${dataResp["first_name"]} ${dataResp["last_name"]}";
+                      name ="${dataResp["first_name"]} ${dataResp["last_name"]}";
                     });
                   } else {
                     //failed to get data (i.e status 404)
