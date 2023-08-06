@@ -15,7 +15,7 @@ class _getHttpState extends State<getHttp> {
   late String id;
   late String email;
   late String name;
-
+  late String linkk;
 //initializing variables
   @override
   void initState() {
@@ -23,6 +23,7 @@ class _getHttpState extends State<getHttp> {
     id = '';
     email = '';
     name = '';
+    linkk = '';
     super.initState();
   }
 
@@ -49,20 +50,33 @@ class _getHttpState extends State<getHttp> {
               "Name:$name ",
               style: TextStyle(fontSize: 20),
             ),
+            Text(
+              "Link:$linkk ",
+              style: TextStyle(fontSize: 20),
+            ),
             SizedBox(
               height: 12,
             ),
             ElevatedButton(
                 onPressed: () async {
                   // use await and async for waiting until the data is fetched ( in case of slow connection )
-                  var serverResponse = await ziraHttp.get(Uri.parse("https://reqres.in/api/users/9")); // get the data from dummy server and parse it
-                  if (serverResponse.statusCode == 200) {  // successfully get data (status 200)
-                    Map<String, dynamic> dataResp = json.decode(serverResponse.body); //jsonDecode to decode string source to dynamic object
-                    dataResp = dataResp['data']; // use 'data' because it is stated like that in the API and to load the body
+                  var serverResponse = await ziraHttp.get(Uri.parse(
+                      "https://reqres.in/api/users/9")); // get the data from dummy server and parse it
+                  if (serverResponse.statusCode == 200) {
+                    // successfully get data (status 200)
+                    Map<String, dynamic> dataResp = json.decode(serverResponse
+                        .body); //jsonDecode to decode string source to dynamic object
+                    dataResp = dataResp[
+                        'data']; // use 'data' because it is stated like that in the API and to load the body
+                    Map<String, dynamic> dataResp2 =
+                        json.decode(serverResponse.body);
+                    dataResp2 = dataResp2['support'];
                     setState(() {
                       id = dataResp["id"].toString();
                       email = dataResp["email"].toString();
-                      name ="${dataResp["first_name"]} ${dataResp["last_name"]}";
+                      name =
+                          "${dataResp["first_name"]} ${dataResp["last_name"]}";
+                      linkk = dataResp2['text'].toString();
                     });
                   } else {
                     //failed to get data (i.e status 404)
