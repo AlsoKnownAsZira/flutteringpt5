@@ -61,9 +61,8 @@ class _getHttpState extends State<getHttp> {
                 onPressed: () async {
                   // use await and async for waiting until the data is fetched ( in case of slow connection )
                   var serverResponse = await ziraHttp.get(Uri.parse(
-                      "https://reqres.in/api/users/9")); // get the data from dummy server and parse it
+                      "https://reqres.in/api/users/9")); 
                   if (serverResponse.statusCode == 200) {
-                    // successfully get data (status 200)
                     Map<String, dynamic> dataResp = json.decode(serverResponse
                         .body); //jsonDecode to decode string source to dynamic object
                     dataResp = dataResp[
@@ -74,12 +73,10 @@ class _getHttpState extends State<getHttp> {
                     setState(() {
                       id = dataResp["id"].toString();
                       email = dataResp["email"].toString();
-                      name =
-                          "${dataResp["first_name"]} ${dataResp["last_name"]}";
+                      name ="${dataResp["first_name"]} ${dataResp["last_name"]}";
                       linkk = dataResp2['text'].toString();
                     });
                   } else {
-                    //failed to get data (i.e status 404)
                     print("ERROR CODE: ${serverResponse.statusCode}");
                     setState(() {
                       id = 'ERROR';
