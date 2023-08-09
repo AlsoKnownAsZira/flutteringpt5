@@ -16,7 +16,7 @@ class _deleteHttpState extends State<deleteHttp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("HTTP DELETE"),
+        title: const Text("HTTP DELETE"),
         centerTitle: true,
         actions: [
           IconButton(
@@ -31,14 +31,14 @@ class _deleteHttpState extends State<deleteHttp> {
                       "User name: ${dataFetched['first_name']} ${dataFetched['last_name']}  -email${dataFetched['email']}";
                 });
               },
-              icon: Icon(Icons.download))
+              icon: const Icon(Icons.download))
         ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: ListView(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(data),
@@ -52,7 +52,7 @@ class _deleteHttpState extends State<deleteHttp> {
                     });
                   }
                 },
-                child: Text("Delete product "))
+                child: const Text("Delete product "))
           ],
         ),
       ),

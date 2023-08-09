@@ -44,7 +44,7 @@ class _getgetState extends State<getget> {
                   var response = await productHttp
                       .get(Uri.parse('https://dummyjson.com/products/1'));
                   if (response.statusCode == 200) {
-                    Map<String, dynamic> fetchedData =
+                    Map<String, dynamic>  fetchedData =
                         jsonDecode(response.body);
                     setState(() {
                       id = fetchedData['id'];
