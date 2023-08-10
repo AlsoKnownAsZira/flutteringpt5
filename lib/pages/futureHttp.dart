@@ -21,7 +21,6 @@ class futureHttp extends StatelessWidget {
       print(e);
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +37,7 @@ class futureHttp extends StatelessWidget {
               );
             } else {
               return ListView.builder(
-                  itemCount: 6,
+                  itemCount: allUser.length,
                   itemBuilder: (context, index) => ListTile(
                         leading: CircleAvatar(
                           backgroundColor: Colors.grey[500],

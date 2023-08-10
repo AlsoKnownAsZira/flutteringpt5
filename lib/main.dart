@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutteringpt5/pages/futureTutor.dart';
 //import 'package:http/http.dart';
 //import 'package:flutteringpt5/pages/getget.dart';
 //import 'pages/getHttp.dart';
@@ -17,7 +18,7 @@ class ziraApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(
-      home: futureHttp(),
+      home: futureTutor(),
       debugShowCheckedModeBanner: false,
     );
   }
