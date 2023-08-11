@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutteringpt5/models/productModel.dart';
 import 'package:http/http.dart' as appHttp;
 
 class futureTutor extends StatefulWidget {
@@ -11,7 +12,7 @@ class futureTutor extends StatefulWidget {
 }
 
 class _futureTutorState extends State<futureTutor> {
-  List<Map<String, dynamic>> allProduct = [];
+  List<ProductModel> allProduct = [];
 
   Future getAllProduct() async {
     try {
@@ -20,7 +21,7 @@ class _futureTutorState extends State<futureTutor> {
       List dataFetched =
           (jsonDecode(response.body) as Map<String, dynamic>)['products'];
       dataFetched.forEach((element) {
-        allProduct.add(element);
+        allProduct.add(ProductModel.fromJson(element));
       });
     } catch (e) {
       print('Error Occured');
@@ -55,12 +56,12 @@ class _futureTutorState extends State<futureTutor> {
                     decoration: BoxDecoration(
                       color: Colors.grey[500],
                       image: DecorationImage(
-                          image: NetworkImage(allProduct[index]['thumbnail']),
+                          image: NetworkImage(allProduct[index].thumbnail),
                           fit: BoxFit.cover),
                     ),
                   ),
-                  title: Text("${allProduct[index]['title']}"),
-                  subtitle: Text("\$${allProduct[index]['price']}"),
+                  title: Text(allProduct[index].title),
+                  subtitle: Text("\$${allProduct[index].price}"),
                 ),
               );
             }
@@ -71,7 +72,7 @@ class _futureTutorState extends State<futureTutor> {
   openProduct(int index) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("${allProduct[index]['title']}"),
+        title: Text(allProduct[index].title),
       ),
       body: Center(
         child: ListView(
@@ -82,35 +83,35 @@ class _futureTutorState extends State<futureTutor> {
               decoration: BoxDecoration(
                 color: Colors.grey[500],
                 image: DecorationImage(
-                    image: NetworkImage(allProduct[index]['thumbnail']),
+                    image: NetworkImage(allProduct[index].thumbnail),
                     fit: BoxFit.fill),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 5,left: 5),
               child: Text(
-                "${allProduct[index]['title']}",
+                allProduct[index].title,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 5,left: 5),
               child: Text(
-                "\$${allProduct[index]['price']}",
+                "\$${allProduct[index].price}",
                 style: TextStyle(fontSize: 15),
               ),
             ),
              Padding(
               padding: const EdgeInsets.only(left: 5),
               child: Text(
-                "Rating:${allProduct[index]['rating']}",
+                "Rating:${allProduct[index].rating}",
                 style: TextStyle(fontSize: 15),
               ),
             ),
               Padding(
               padding: const EdgeInsets.only(left: 5),
               child: Text(
-                "Stock:${allProduct[index]['stock']}",
+                "Stock:${allProduct[index].stock}",
                 style: TextStyle(fontSize: 15),
               ),
             ),
@@ -121,7 +122,7 @@ class _futureTutorState extends State<futureTutor> {
               Padding(
               padding: const EdgeInsets.only(left: 5),
               child: Text(
-                "${allProduct[index]['description']}",
+                allProduct[index].description,
                 style: TextStyle(fontSize: 15),
               ),
             ),

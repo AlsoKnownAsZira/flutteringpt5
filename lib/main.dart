@@ -18,7 +18,7 @@ class ziraApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(
-      home: futureHttp(),
+      home: futureTutor(),
       debugShowCheckedModeBanner: false,
     );
   }
