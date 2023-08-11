@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutteringpt5/models/userModel.dart';
 import 'package:http/http.dart ' as ziraHttp;
+
 // ignore_for_file: prefer_const_constructors
 // ignore: must_be_immutable
 class futureHttp extends StatelessWidget {
   futureHttp({super.key});
-  List<Map<String, dynamic>> allUser = [];
+  List<UserModel> allUser = [];
   Future getAll() async {
     try {
       var response =
@@ -14,13 +16,14 @@ class futureHttp extends StatelessWidget {
       List dataFetched =
           (jsonDecode(response.body) as Map<String, dynamic>)["data"];
       dataFetched.forEach((element) {
-        allUser.add(element);
+        allUser.add(UserModel.fromJson(element));
       });
     } catch (e) {
       print('Error occured');
       print(e);
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,17 +39,21 @@ class futureHttp extends StatelessWidget {
                 child: Text("LOADING..........."),
               );
             } else {
+              if (allUser.length == 0) {
+                return Center(
+                  child: Text("NO DATA"),
+                );
+              }
               return ListView.builder(
                   itemCount: allUser.length,
                   itemBuilder: (context, index) => ListTile(
                         leading: CircleAvatar(
                           backgroundColor: Colors.grey[500],
-                          backgroundImage:
-                              NetworkImage(allUser[index]['avatar']),
+                          backgroundImage: NetworkImage(allUser[index].avatar),
                         ),
                         title: Text(
-                            "${allUser[index]['first_name']} ${allUser[index]['last_name']}"),
-                        subtitle: Text("${allUser[index]['email']}"),
+                            "${allUser[index].firstName} ${allUser[index].lastName}"),
+                        subtitle: Text("${allUser[index].email}"),
                       ));
             }
           }),
